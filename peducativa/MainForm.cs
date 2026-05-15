@@ -24,6 +24,8 @@ namespace peducativa
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		
+		// Esta es la dirección para encontrar y entrar a nuestra base de datos
 		private string cadenaConexion = "Server=localhost;Database=peducativa;Uid=root;Pwd=;";
 		
 		public MainForm()
@@ -41,12 +43,12 @@ namespace peducativa
 		public void CargarUsuarios()
 		{
 		    try {
-		        using (MySqlConnection conexion = new MySqlConnection(cadenaConexion)) 
+		        using (MySqlConnection conexion = new MySqlConnection(cadenaConexion)) // 1. Preparamos el túnel (conexión) usando nuestra "dirección" (cadenaConexion).
 		        {
-		            string consulta = "SELECT id, nombre, clave, rol FROM usuario";
-		            conexion.Open();
-		            MySqlDataAdapter adaptador = new MySqlDataAdapter(consulta, conexion);
-		            DataTable tabla = new DataTable(); 
+		            string consulta = "SELECT id, nombre, clave, rol FROM usuario"; // 2. Escribimos la nota de lo que queremos pedir (seleccionar datos de la tabla usuario).
+		            conexion.Open(); // 3. Abrimos la puerta de la base de datos.
+		            MySqlDataAdapter adaptador = new MySqlDataAdapter(consulta, conexion); // 4. El 'adaptador' es como un mensajero: lleva la pregunta y trae los resultados.
+		            DataTable tabla = new DataTable(); // 5. Creamos una tabla vacía en la memoria de la computadora para guardar lo que llegue.
 		            adaptador.Fill(tabla);
 		            
 		            // Asignación al control visual
@@ -60,8 +62,8 @@ namespace peducativa
 		void BtnAgregarClick(object sender, EventArgs e)
 		{
 			UsuarioNuevo frmnuevo  = new UsuarioNuevo();
-		
-			if (frmnuevo.ShowDialog() == DialogResult.OK) // para mantener estructura
+	
+			if (frmnuevo.ShowDialog() == DialogResult.OK)
             {
 				CargarUsuarios();
 			}
@@ -76,7 +78,7 @@ namespace peducativa
 		        string clave = dgvUsuarios.CurrentRow.Cells["clave"].Value.ToString();
 		        string rol = dgvUsuarios.CurrentRow.Cells["rol"].Value.ToString();
 		
-		        // 2. Abrir el formulario y pasarle los datos (necesitaremos un constructor nuevo)
+		        // 2. Abrir el formulario y pasarle los datos 
 		        UsuarioNuevo frmModificar = new UsuarioNuevo(id, nombre, clave, rol);
 		        
 		        if (frmModificar.ShowDialog() == DialogResult.OK)
@@ -93,20 +95,22 @@ namespace peducativa
 		{
 			if (dgvUsuarios.SelectedRows.Count > 0)
 		    {
-		        // 2. OBTENER EL ID de la fila seleccionada (Esto es lo que te faltaba)
+		        // 2. OBTENER EL ID de la fila seleccionada
 		        string idParaEliminar = dgvUsuarios.CurrentRow.Cells["id"].Value.ToString();
 		
 		        // 3. Confirmación (Opcional pero recomendado)
 		        if (MessageBox.Show("¿Desea eliminar este usuario?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
 		        {
-		            string consulta = "DELETE FROM usuario WHERE id = @id";
+		            string consulta = "DELETE FROM usuario WHERE id = @id"; // 1. Escribimos la orden para la base de datos: "BORRAR DE la tabla usuario DONDE el id coincida".
 		            try {
+		            	// 2. Preparamos la conexión y el comando (el sobre y la carta que vamos a enviar).
 		                using (MySqlConnection conexion = new MySqlConnection(cadenaConexion))
 		                using (MySqlCommand cmd = new MySqlCommand(consulta, conexion))
 		                {
-		                    // AQUÍ USAMOS LA VARIABLE QUE CREAMOS ARRIBA
+		                    // 3. ¡Seguridad primero! Le decimos que "@id" es el número del usuario que atrapamos de la tabla.
+        					// Esto evita que borremos a alguien por accidente.
 		                    cmd.Parameters.AddWithValue("@id", idParaEliminar);
-		
+							// 4. Abrimos la base de datos y ejecutamos la orden (hacemos el borrado).
 		                    conexion.Open();
 		                    cmd.ExecuteNonQuery();
 		                }
@@ -133,7 +137,8 @@ namespace peducativa
 		            conexion.Open();
 		            MySqlDataAdapter adaptador = new MySqlDataAdapter(consulta, conexion);
 		            
-		            // El '%' indica que puede haber cualquier texto después de lo que escribas
+		            // 2. El símbolo '%' es la clave. 
+            		// Si escribes "J", el '%' busca todo lo que empiece por J (Jose, Joselyn, Juan).
 		            adaptador.SelectCommand.Parameters.AddWithValue("@nombre", nombreBusqueda + "%");
 		            
 		            DataTable tabla = new DataTable(); 
