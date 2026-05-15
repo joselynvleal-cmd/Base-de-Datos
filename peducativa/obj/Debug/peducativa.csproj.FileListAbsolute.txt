@@ -1,0 +1,10 @@
+C:\Users\Admin\OneDrive\Documentos\SharpDevelop Projects\peducativa\peducativa\obj\Debug\peducativa.csprojResolveAssemblyReference.cache
+C:\Users\Admin\OneDrive\Documentos\SharpDevelop Projects\peducativa\peducativa\obj\Debug\peducativa.MainForm.resources
+C:\Users\Admin\OneDrive\Documentos\SharpDevelop Projects\peducativa\peducativa\obj\Debug\peducativa.UsuarioNuevo.resources
+C:\Users\Admin\OneDrive\Documentos\SharpDevelop Projects\peducativa\peducativa\obj\Debug\peducativa.csproj.GenerateResource.Cache
+C:\Users\Admin\OneDrive\Documentos\SharpDevelop Projects\peducativa\peducativa\bin\Debug\peducativa.exe.config
+C:\Users\Admin\OneDrive\Documentos\SharpDevelop Projects\peducativa\peducativa\bin\Debug\peducativa.exe
+C:\Users\Admin\OneDrive\Documentos\SharpDevelop Projects\peducativa\peducativa\bin\Debug\peducativa.pdb
+C:\Users\Admin\OneDrive\Documentos\SharpDevelop Projects\peducativa\peducativa\bin\Debug\MySql.Data.dll
+C:\Users\Admin\OneDrive\Documentos\SharpDevelop Projects\peducativa\peducativa\obj\Debug\peducativa.exe
+C:\Users\Admin\OneDrive\Documentos\SharpDevelop Projects\peducativa\peducativa\obj\Debug\peducativa.pdb
